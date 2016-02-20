@@ -8,10 +8,12 @@ A sqlmap-style python colorful console output module, with verbose control
 
 Full function support python 3.x & 2.6 2.7  
 support win linux Mac (Mac support in theory,did not tested yet)  
+support PyCharm's console  
 warnprint() doesn't work in powershell, it will print the normal white characters  
 
 全部功能支持python 3.x 2.6 2.7  
 支持win linux Mac(Mac理论上支持,未测试)  
+支持PyCharm的内置控制台  
 在Powershell中warnprint()的染色失效(变成原来的白色)  
 # Install
 ---
