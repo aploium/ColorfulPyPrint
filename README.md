@@ -17,11 +17,11 @@ DO NOT support powershell
 ---
 ### English:  
  - 1. Copy the ColorfulPyPrint directory(I mean,the sub one with __init__.py) into YOUR_PYTHON_INSTALL_DIR/Lib/site-packages/  
- - 2. from ColorfulPyPrint import *  
+ - 2. Can not use pip (for now)
     
 ### 中文:  
  - 1. 复制ColorfulPyPrint文件夹(项目里面带有__init__.py的子文件夹)到 你的Python安装目录/Lib/site-packages/  
- - 2. from ColorfulPyPrint import *  
+ - 2. 不能使用pip来安装(自己写的小轮子嘛~)  
 
 # Usage
 ---
