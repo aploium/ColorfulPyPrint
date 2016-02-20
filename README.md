@@ -1,16 +1,16 @@
 # ColorfulPyPrint
 ---
-`version: 0.2.0`  
+`version: 0.2.2`  
   
 A sqlmap-style python colorful console output module, with verbose control  
 一个sqlmap风格的python控制台彩色输出模块  
 支持verbose控制  
 
-Full function support python 3.x & 2.x  
+Full function support python 3.x & 2.6 2.7  
 support win linux Mac (Mac support in theory,did not tested yet)  
 DO NOT support powershell  
 
-全部功能支持python 3.x 和 2.x  
+全部功能支持python 3.x 2.6 2.7  
 支持win linux Mac(Mac理论上支持,未测试)  
 不支持powershell  
 # Install
@@ -47,5 +47,5 @@ dbgprint('blah7', v=7) # will NOT be printed
 ```  
  
 
-# ScreenShot
+# ScreenShot 
 ![image](https://raw.githubusercontent.com/Aploium/ColorfulPyPrint/master/demo.png)

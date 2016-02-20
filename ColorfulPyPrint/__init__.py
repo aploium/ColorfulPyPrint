@@ -1,10 +1,12 @@
 # -*- coding: UTF-8 -*-
+from __future__ import print_function
+
 from ._Beep import beep
 from ._ColorfulPrint import Fore
 from ._logtime import logtime
 
 __author__ = 'Aploium'
-__version__ = '0.2.0'
+__version__ = '0.2.2'
 __all__ = ['infoprint', 'dbgprint', 'warnprint', 'errprint', 'importantprint', 'apoutput_set_verbose_level',
            'apoutput_current_verbose_level']
 
@@ -22,7 +24,7 @@ O_TIME_LEVEL = TIME_LEVEL_TIME
 O_VERBOSE_LEVEL = 1
 
 
-def _printr(output, *other_inputs, printtype=PRINT_TYPE_INFO, timelevel=O_TIME_LEVEL, is_beep=False):
+def _printr(output, other_inputs, printtype=PRINT_TYPE_INFO, timelevel=O_TIME_LEVEL, is_beep=False):
     # Time Section
     if timelevel == TIME_LEVEL_NONE:
         section_time = ''
@@ -76,26 +78,41 @@ def apoutput_current_verbose_level():
     return O_VERBOSE_LEVEL
 
 
-def infoprint(output, *other_inputs, v=1, timelevel=O_TIME_LEVEL, is_beep=False):
+def _handle_kwargs(v, timelevel, is_beep, kwargs):
+    if 'v' not in kwargs:
+        kwargs['v'] = v
+    if 'timelevel' not in kwargs:
+        kwargs['timelevel'] = timelevel
+    if 'is_beep' not in kwargs:
+        kwargs['is_beep'] = is_beep
+    return kwargs['v'], kwargs['timelevel'], kwargs['is_beep']
+
+
+def infoprint(output, *other_inputs, **kwargs):
+    v, timelevel, is_beep = _handle_kwargs(1, O_TIME_LEVEL, False, kwargs)
     if v <= O_VERBOSE_LEVEL:
-        _printr(output, *other_inputs, printtype=PRINT_TYPE_INFO, timelevel=timelevel, is_beep=is_beep)
+        _printr(output, other_inputs, printtype=PRINT_TYPE_INFO, timelevel=timelevel, is_beep=is_beep)
 
 
-def dbgprint(output, *other_inputs, v=3, timelevel=O_TIME_LEVEL, is_beep=False):
+def dbgprint(output, *other_inputs, **kwargs):
+    v, timelevel, is_beep = _handle_kwargs(3, O_TIME_LEVEL, False, kwargs)
     if v <= O_VERBOSE_LEVEL:
-        _printr(output, *other_inputs, printtype=PRINT_TYPE_DEBUG, timelevel=timelevel, is_beep=is_beep)
+        _printr(output, other_inputs, printtype=PRINT_TYPE_DEBUG, timelevel=timelevel, is_beep=is_beep)
 
 
-def warnprint(output, *other_inputs, v=2, timelevel=O_TIME_LEVEL, is_beep=False):
+def warnprint(output, *other_inputs, **kwargs):
+    v, timelevel, is_beep = _handle_kwargs(2, O_TIME_LEVEL, False, kwargs)
     if v <= O_VERBOSE_LEVEL:
-        _printr(output, *other_inputs, printtype=PRINT_TYPE_WARN, timelevel=timelevel, is_beep=is_beep)
+        _printr(output, other_inputs, printtype=PRINT_TYPE_WARN, timelevel=timelevel, is_beep=is_beep)
 
 
-def errprint(output, *other_inputs, v=0, timelevel=O_TIME_LEVEL, is_beep=False):
+def errprint(output, *other_inputs, **kwargs):
+    v, timelevel, is_beep = _handle_kwargs(0, O_TIME_LEVEL, False, kwargs)
     if v <= O_VERBOSE_LEVEL:
-        _printr(output, *other_inputs, printtype=PRINT_TYPE_ERROR, timelevel=timelevel, is_beep=is_beep)
+        _printr(output, other_inputs, printtype=PRINT_TYPE_ERROR, timelevel=timelevel, is_beep=is_beep)
 
 
-def importantprint(output, *other_inputs, v=0, timelevel=O_TIME_LEVEL, is_beep=True):
+def importantprint(output, *other_inputs, **kwargs):
+    v, timelevel, is_beep = _handle_kwargs(0, O_TIME_LEVEL, True, kwargs)
     if v <= O_VERBOSE_LEVEL:
-        _printr(output, *other_inputs, printtype=PRINT_TYPE_IMPORTANT_NOTICE, timelevel=timelevel, is_beep=is_beep)
+        _printr(output, other_inputs, printtype=PRINT_TYPE_IMPORTANT_NOTICE, timelevel=timelevel, is_beep=is_beep)

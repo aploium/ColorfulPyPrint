@@ -1,4 +1,6 @@
-# demo version 0.2.0
+# -*- coding: UTF-8 -*-
+from __future__ import unicode_literals  # this demo.py is write in python3 style
+# demo version 0.2.2
 
 # Full function support python 3.x & 2.x
 # support win linux Mac (Mac support in theory,did not tested yet)
