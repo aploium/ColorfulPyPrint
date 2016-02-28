@@ -103,7 +103,7 @@ def _printr(output, other_inputs, printtype=PRINT_TYPE_INFO, timelevel=O_TIME_LE
     # Print to extra destination(s)
 
     for item in extra_print_dests[printtype]:
-        item.write(buffer.buff)
+        item.write(section_time + section_type + buffer.buff)
 
 
 def apoutput_set_verbose_level(verbose_level=1):
