@@ -1,6 +1,6 @@
 # ColorfulPyPrint
 ---
-`version: 0.2.2`  
+`version: 0.3.0`  
   
 A sqlmap-style python colorful console output module, with verbose control  
 一个sqlmap风格的python控制台彩色输出模块  
