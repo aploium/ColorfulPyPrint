@@ -6,9 +6,10 @@ import sys
 from ._Beep import beep
 from ._ColorfulPrint import Fore
 from ._logtime import logtime
+from .extra_output_destination import ExternalPrintBuffer as _ExternalPrintBuffer
 
 __author__ = 'Aploium'
-__version__ = '0.3.0'
+__version__ = '0.3.1'
 __all__ = ['infoprint', 'dbgprint', 'warnprint', 'errprint', 'importantprint', 'apoutput_set_verbose_level',
            'apoutput_current_verbose_level', 'clean_extra_output_destination', 'add_extra_output_destination']
 
@@ -32,19 +33,6 @@ extra_print_dests = {
     PRINT_TYPE_ERROR: [],
     PRINT_TYPE_IMPORTANT_NOTICE: []
 }
-
-
-class _ExternalPrintBuffer:
-    def __init__(self):
-        self.buff = ''
-        self.__console__ = sys.stdout
-
-    def write(self, output_stream):
-        self.buff += output_stream
-        self.__console__.write(output_stream)
-
-    def reset(self):
-        sys.stdout = self.__console__
 
 
 def _printr(output, other_inputs, printtype=PRINT_TYPE_INFO, timelevel=O_TIME_LEVEL, is_beep=False):
