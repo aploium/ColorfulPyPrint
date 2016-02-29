@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals  # this demo.py is write in python3 style
-# demo version 0.3.0
+# demo version 0.3.2
 
 # Full function support python 3.x & 2.x
 # support win linux Mac (Mac support in theory,did not tested yet)
@@ -76,25 +76,29 @@ infoprint('some information, 带有日期的sqlmap式输出', timelevel=2)
 # output without timestamp
 warnprint('some warning, 没有时间前缀的sqlmap式输出', timelevel=0)
 
-# webQQ client (experimental)
+# #########################
+# Now, you can provide an custom object to act as extra output destination(s)
+# the only requirement is an '.write()' method, eg: obj.write(something)
+
+# print to external destination:
+#     webQQ client (experimental)
 # please see https://github.com/Aploium/WebQQ_API for more information
-from ColorfulPyPrint.extra_output_destination import WebqqClient
+from ColorfulPyPrint.extra_output_destination.webqq_client import WebqqClient
 
 warnprint('the following demo requires an self-hosted webQQ msg sender server,please see '
-          'https://github.com/Aploium/WebQQ_API'
+          'https://github.com/Aploium/WebQQ_API '
           'for more information')
-server = '127.0.0.1'
+server = 'qcloud.aploium.com'
 target = 'Xno0Pu7bnCB'
 token = 'apl'
 try:
     q_client = WebqqClient(server, token=token, target=target)
     q_client.send_to_discuss('webqq_init')
-    # Now, you can provide an custom object to act as extra output destination(s)
-    # the only requirement is an '.write()' method, eg: obj.write(something)
-    add_extra_output_destination(q_client)
+    add_extra_output_destination(q_client, important_level=2)
     importantprint('an important msg that will be sent to your qq')
     errprint('an error msg that will be sent to your qq')
     infoprint('an info msg that will [NOT] be sent to your qq')
+    infoprint('(manual configure important level to 3) an info msg that will be sent to your qq', i=3)
 except Exception as e:
     clean_extra_output_destination()  # reset the extra output settings
     errprint('Unable to connect to the webqq server:', e)
