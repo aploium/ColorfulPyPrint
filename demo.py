@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 from __future__ import unicode_literals  # this demo.py is write in python3 style
-# demo version 0.3.2
+# demo version 0.3.4
 
 # Full function support python 3.x & 2.x
 # support win linux Mac (Mac support in theory,did not tested yet)
@@ -10,29 +10,30 @@ from __future__ import unicode_literals  # this demo.py is write in python3 styl
 #     2. from ColorfulPyPrint import *
 # Usage: please execute this demo
 
-# 全部功能支持python 3.x 和 2.x
+# 全部功能支持python 3.x 和 2.x (py2.x请自行处理unicode问题)
 # 支持win linux Mac(Mac理论上支持,未测试)
 # 不支持powershell
 # 安装方法为复制ApOutput文件夹到 你的Python安装目录/Lib/site-packages/
 # 并在项目中添加 from ColorfulPyPrint import * (详见下方demo)
 
+# 外部输出模块:
+# WebqqClient 发送消息到QQ号或者讨论组
+# AlidayuSMS 通过阿里大鱼的短信接口发送短信到手机
 
 # import
 from ColorfulPyPrint import *
 
-# 打印版本号
-from ColorfulPyPrint import __version__  # print version (do NOT add this line in your project)
+# print version number
+from ColorfulPyPrint import __version__  # print version (do NOT add this line in your actual project)
 
 infoprint('version:', __version__)
 
-# sqlmap 式输出
 # sqlmap-style output
 
 infoprint('some information')
 infoprint('显然支持中文(Chinese support)')
-infoprint(['也支持输出非', b'str', '类型', ('所有内置print可打印的类型都可以', {'key': 'value'})])
+infoprint(['support non', b'str', 'type', ('actually,you can print anything', {'key': 'value'})])
 
-# (v0.1.8+) 可以输出多个参数,这样在某些地方相当方便,如:
 # (v0.1.8+) Multi paras support,very useful in some places
 example_array = ['a', 'b', 'c', 'd', 'e']
 infoprint('the length of array:', example_array, 'is', len(example_array))
@@ -72,16 +73,16 @@ infoprint('--- changing verbose level to', apoutput_current_verbose_level())
 infoprint('an verbose level 6 output', v=6)
 
 # output with date
-infoprint('some information, 带有日期的sqlmap式输出', timelevel=2)
+infoprint('some information, output with date', timelevel=2)
 # output without timestamp
-warnprint('some warning, 没有时间前缀的sqlmap式输出', timelevel=0)
+warnprint('some warning, output without timestamp', timelevel=0)
 
-# #########################
+# ###################################################
 # Now, you can provide an custom object to act as extra output destination(s)
 # the only requirement is an '.write()' method, eg: obj.write(something)
 
 # print to external destination:
-#     webQQ client (experimental)
+# ####### webQQ client ########
 # please see https://github.com/Aploium/WebQQ_API for more information
 from ColorfulPyPrint.extra_output_destination.webqq_client import WebqqClient
 
@@ -102,4 +103,30 @@ try:
 except Exception as e:
     clean_extra_output_destination()  # reset the extra output settings
     errprint('Unable to connect to the webqq server:', e)
+clean_extra_output_destination()
+
+# ######### alidayu sms sender #########
+# please see http://www.alidayu.com for more information
+from ColorfulPyPrint.extra_output_destination.aliyun_sms import AlidayuSMS
+import json  # json is required to convert json-str to json-object
+
+demo_app_key = input('Please input your app_key: ')
+demo_app_secret = input('Please input your app_secret: ')
+demo_rec_num = input('Please input your cell phone number:  ')
+demo_partner_id = input('Please input your partner_id (optional),press enter to keep blank: ')
+demo_sms_free_sign_name = input('Please input your sign, eg. 身份验证: ')
+demo_sms_template_code = input('Please input the template code, eg. SMS_5376067: ')
+demo_sms_default_param = json.loads(input('Please input the params format, in json: '))
+demo_sms_default_msg_key = input('Please input the default key containing sms content: ')
+
+sms = AlidayuSMS(demo_app_key, demo_app_secret,
+                 default_rec_num=demo_rec_num,
+                 default_sms_free_sign_name=demo_sms_free_sign_name,
+                 default_sms_template_code=demo_sms_template_code,
+                 default_partner_id=demo_partner_id
+                 )
+sms.set_default_sms_param(demo_sms_default_param, demo_sms_default_msg_key)
+
+add_extra_output_destination(sms, important_level=2)
+importantprint('an important msg that will be sent to your phone')
 clean_extra_output_destination()
