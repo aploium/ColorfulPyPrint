@@ -15,8 +15,8 @@ from .extra_output_destination import clean_extra_output_destination, add_extra_
 
 __author__ = 'Aploium'
 __version__ = '0.3.2'
-__all__ = ['infoprint', 'dbgprint', 'warnprint', 'errprint', 'importantprint', 'apoutput_set_verbose_level',
-           'apoutput_current_verbose_level', 'clean_extra_output_destination', 'add_extra_output_destination']
+__all__ = ['infoprint', 'dbgprint', 'warnprint', 'errprint', 'importantprint', 'ColorfulPyPrint_set_verbose_level',
+           'ColorfulPyPrint_current_verbose_level', 'clean_extra_output_destination', 'add_extra_output_destination']
 
 PRINT_TYPE_INFO = 0
 PRINT_TYPE_DEBUG = 1
@@ -103,7 +103,7 @@ def _printr(output, other_inputs, print_type=PRINT_TYPE_INFO, timelevel=O_TIME_L
         item.write(section_time + section_type + buffer.buff)
 
 
-def apoutput_set_verbose_level(verbose_level=1):
+def ColorfulPyPrint_set_verbose_level(verbose_level=1):
     """
     set output verbose level
     :type verbose_level: int
@@ -113,7 +113,7 @@ def apoutput_set_verbose_level(verbose_level=1):
     return O_VERBOSE_LEVEL
 
 
-def apoutput_current_verbose_level():
+def ColorfulPyPrint_current_verbose_level():
     """
     show current verbose level
     :rtype: int

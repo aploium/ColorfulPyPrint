@@ -13,7 +13,7 @@ from __future__ import unicode_literals  # this demo.py is write in python3 styl
 # 全部功能支持python 3.x 和 2.x (py2.x请自行处理unicode问题)
 # 支持win linux Mac(Mac理论上支持,未测试)
 # 不支持powershell
-# 安装方法为复制ApOutput文件夹到 你的Python安装目录/Lib/site-packages/
+# 安装方法为复制ColorfulPyPrint文件夹到 你的Python安装目录/Lib/site-packages/
 # 并在项目中添加 from ColorfulPyPrint import * (详见下方demo)
 
 # 外部输出模块:
@@ -47,29 +47,29 @@ importantprint('some important info WITHOUT beep,use is_beep=False to close beep
 
 
 # verbose level is set to 1 by default, warnprint and dbgprint would NOT be print
-infoprint('--- current verbose:', apoutput_current_verbose_level())
+infoprint('--- current verbose:', ColorfulPyPrint_current_verbose_level())
 infoprint('you CANNOT see the warnprint(level3) and dbgprint(level3) here')
 warnprint('This line would NOT be print by default')  # default verbose level for warnprint is 2
 dbgprint('This line would NOT be print by default')  # default verbose level for dbgprint is 3
 
-# use apoutput_set_verbose_level(new_level) to change verbose level
+# use ColorfulPyPrint_set_verbose_level(new_level) to change verbose level
 # well, such long function name can avoid conflict
-apoutput_set_verbose_level(2)
-# use apoutput_current_verbose_level() to get current verbose level
-infoprint('--- changing verbose level to', apoutput_current_verbose_level())
+ColorfulPyPrint_set_verbose_level(2)
+# use ColorfulPyPrint_current_verbose_level() to get current verbose level
+infoprint('--- changing verbose level to', ColorfulPyPrint_current_verbose_level())
 warnprint('great! now you can see me')  # 2 == 2
 infoprint('you CANNOT see the dbgprint(level3) here')
 dbgprint('This line is still invisible in level 2')
-apoutput_set_verbose_level(3)
-infoprint('--- changing verbose level to', apoutput_current_verbose_level())
+ColorfulPyPrint_set_verbose_level(3)
+infoprint('--- changing verbose level to', ColorfulPyPrint_current_verbose_level())
 dbgprint('level 3 you can see dbgprint')
 
 # you can custom some output's verbose level using v=[any integer number]
-infoprint('--- current verbose:', apoutput_current_verbose_level())
+infoprint('--- current verbose:', ColorfulPyPrint_current_verbose_level())
 infoprint('you CANNOT see an custom verbose6 infoprint here')
 infoprint('an verbose level 6 output(CAN NOT SEE in verbose level 3)', v=6)
-apoutput_set_verbose_level(6)
-infoprint('--- changing verbose level to', apoutput_current_verbose_level())
+ColorfulPyPrint_set_verbose_level(6)
+infoprint('--- changing verbose level to', ColorfulPyPrint_current_verbose_level())
 infoprint('an verbose level 6 output', v=6)
 
 # output with date
